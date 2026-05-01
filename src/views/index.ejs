@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="card">
+        <div class="tabs">
+            <button class="tab active" data-tab="login">Login</button>
+            <button class="tab" data-tab="register">Sign Up</button>
+        </div>
+
+        <div id="alert" class="alert hidden"></div>
+
+        <form id="login" class="form active">
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="example@mail.com" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <form id="register" class="form">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="John Doe" required>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="example@mail.com" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn">Create Account</button>
+        </form>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
