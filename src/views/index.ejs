@@ -4,45 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .form { display: none; }
+        .form.active { 
+            display: flex; 
+            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(12px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .alert.hidden { display: none !important; }
+        .alert { padding: 12px; border-radius: 6px; font-size: 14px; text-align: center; margin-bottom: 16px; margin-top: 16px; font-medium; border: 1px solid transparent; }
+        .alert.success { background-color: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+        .alert.error { background-color: #fef2f2; color: #991b1b; border-color: #fecaca; }
+    </style>
 </head>
-<body>
+<body class="bg-white text-zinc-950 min-h-screen flex items-center justify-center font-sans antialiased">
 
-    <div class="card">
-        <div class="tabs">
-            <button class="tab active" data-tab="login">Login</button>
-            <button class="tab" data-tab="register">Sign Up</button>
-        </div>
+    <div class="flex flex-1 flex-col justify-center px-4 py-10 lg:px-6 w-full max-w-md">
+        
 
         <div id="alert" class="alert hidden"></div>
 
-        <form id="login" class="form active">
-            <div class="field">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="example@mail.com" required>
+        <!-- LOGIN FORM -->
+        <div id="login-container" class="form active flex-col w-full rounded-xl border border-zinc-200 bg-white text-zinc-950 shadow-sm">
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="font-semibold tracking-tight text-2xl text-center">Sign In</h3>
+                <p class="text-sm text-zinc-500 text-center">Enter your email and password to access your account</p>
             </div>
-            <div class="field">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="••••••••" required>
+            <div class="p-6 pt-0">
+                <form id="login" class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+                        <input type="email" name="email" class="flex h-9 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950" placeholder="m@example.com" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
+                        <input type="password" name="password" class="flex h-9 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 shadow h-9 px-4 py-2 w-full mt-2">
+                        Sign In
+                    </button>
+                </form>
+                <div class="mt-4 text-center text-sm text-zinc-500">
+                    Don't have an account? <a href="javascript:void(0)" class="tab font-medium text-zinc-900 underline underline-offset-4 hover:text-zinc-700" data-tab="register-container">Sign up</a>
+                </div>
             </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
+        </div>
 
-        <form id="register" class="form">
-            <div class="field">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="John Doe" required>
+        <!-- REGISTER FORM -->
+        <div id="register-container" class="form flex-col w-full rounded-xl border border-zinc-200 bg-white text-zinc-950 shadow-sm">
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="font-semibold tracking-tight text-2xl text-center">Create an account</h3>
+                <p class="text-sm text-zinc-500 text-center">Enter your details below to create your workspace account</p>
             </div>
-            <div class="field">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="example@mail.com" required>
+            <div class="p-6 pt-0">
+                <form id="register" class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Name</label>
+                        <input type="text" name="username" class="flex h-9 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950" placeholder="John Doe" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+                        <input type="email" name="email" class="flex h-9 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950" placeholder="m@example.com" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
+                        <input type="password" name="password" class="flex h-9 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950" placeholder="Password" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Confirm Password</label>
+                        <input type="password" name="confirm_password" class="flex h-9 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="btn inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 shadow h-9 px-4 py-2 w-full mt-4">
+                        Create account
+                    </button>
+                    <p class="text-center text-xs text-zinc-500 mt-4">
+                        By signing up, you agree to our <a href="#" class="underline underline-offset-4 hover:text-zinc-900">Terms of Service</a> and <a href="#" class="underline underline-offset-4 hover:text-zinc-900">Privacy Policy</a>.
+                    </p>
+                </form>
+                <div class="mt-4 text-center text-sm text-zinc-500">
+                    Already have an account? <a href="javascript:void(0)" class="tab font-medium text-zinc-900 underline underline-offset-4 hover:text-zinc-700" data-tab="login-container">Sign in</a>
+                </div>
             </div>
-            <div class="field">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="btn">Create Account</button>
-        </form>
+        </div>
+
     </div>
 
     <script src="/script.js"></script>
